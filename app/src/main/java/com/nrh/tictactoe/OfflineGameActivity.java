@@ -1,6 +1,5 @@
 package com.nrh.tictactoe;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -21,6 +20,7 @@ public class OfflineGameActivity extends AppCompatActivity {
     private int playerBWins;
     private TextView playerAWinsTextView;
     private TextView playerBWinsTextView;
+    private TextView currentPlayerTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +40,7 @@ public class OfflineGameActivity extends AppCompatActivity {
 
         playerAWinsTextView = findViewById(R.id.player_a_wins);
         playerBWinsTextView = findViewById(R.id.player_b_wins);
+        currentPlayerTextView = findViewById(R.id.current_player);
 
         ImageButton returnButton = findViewById(R.id.btn_return);
         returnButton.setOnClickListener(v -> onBackPressed());
@@ -56,8 +57,10 @@ public class OfflineGameActivity extends AppCompatActivity {
 
                 if (isPlayerOneTurn) {
                     board[position] = "X";
+                    currentPlayerTextView.setText("Player B's Turn");
                 } else {
                     board[position] = "O";
+                    currentPlayerTextView.setText("Player A's Turn");
                 }
 
                 adapter.notifyDataSetChanged();
@@ -65,10 +68,10 @@ public class OfflineGameActivity extends AppCompatActivity {
                 if (checkWinner()) {
                     if (isPlayerOneTurn) {
                         playerAWins++;
-                        Toast.makeText(OfflineGameActivity.this, "Player 1 wins!", Toast.LENGTH_LONG).show();
+                        Toast.makeText(OfflineGameActivity.this, "Player A wins!", Toast.LENGTH_LONG).show();
                     } else {
                         playerBWins++;
-                        Toast.makeText(OfflineGameActivity.this, "Player 2 wins!", Toast.LENGTH_LONG).show();
+                        Toast.makeText(OfflineGameActivity.this, "Player B wins!", Toast.LENGTH_LONG).show();
                     }
                     updateWinCounters();
                     resetBoard();
@@ -117,6 +120,7 @@ public class OfflineGameActivity extends AppCompatActivity {
             board[i] = "";
         }
         isPlayerOneTurn = true;
+        currentPlayerTextView.setText("Player A's Turn");
         ((GridAdapter) gridView.getAdapter()).notifyDataSetChanged();
     }
 

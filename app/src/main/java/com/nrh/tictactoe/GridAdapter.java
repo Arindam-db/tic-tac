@@ -43,7 +43,8 @@ public class GridAdapter extends BaseAdapter {
             textView.setLayoutParams(new ViewGroup.LayoutParams(200, 200)); // Set size of each cell
             textView.setGravity(android.view.Gravity.CENTER);
             textView.setTextSize(32);
-            textView.setTypeface(customFont, Typeface.BOLD); // Set custom font and make text bold
+            textView.setTypeface(customFont, Typeface.BOLD);// Set custom font and make text bold
+            textView.setTextColor(context.getResources().getColor(R.color.black)); // Set text color
             textView.setBackgroundResource(R.drawable.grid_cell_background); // Set custom background
         } else {
             textView = (TextView) convertView;

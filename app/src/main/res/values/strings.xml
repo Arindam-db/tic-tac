@@ -3,4 +3,5 @@
     <string name="title">Tic Tac Toe</string>
     <string name="online">ONLINE</string>
     <string name="offline">OFFLINE</string>
+    <string name="heading_main">TIC TAC TOE</string>
 </resources>
