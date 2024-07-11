@@ -1,5 +1,7 @@
 package com.nrh.tictactoe;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -68,15 +70,15 @@ public class OfflineGameActivity extends AppCompatActivity {
                 if (checkWinner()) {
                     if (isPlayerOneTurn) {
                         playerAWins++;
-                        Toast.makeText(OfflineGameActivity.this, "Player A wins!", Toast.LENGTH_LONG).show();
+                        showResultDialog("Player A wins!");
                     } else {
                         playerBWins++;
-                        Toast.makeText(OfflineGameActivity.this, "Player B wins!", Toast.LENGTH_LONG).show();
+                        showResultDialog("Player B wins!");
                     }
                     updateWinCounters();
                     resetBoard();
                 } else if (isBoardFull()) {
-                    Toast.makeText(OfflineGameActivity.this, "It's a draw!", Toast.LENGTH_LONG).show();
+                    showResultDialog("It's a draw!");
                     resetBoard();
                 } else {
                     isPlayerOneTurn = !isPlayerOneTurn;
@@ -127,5 +129,18 @@ public class OfflineGameActivity extends AppCompatActivity {
     private void updateWinCounters() {
         playerAWinsTextView.setText("Player A Wins: " + playerAWins);
         playerBWinsTextView.setText("Player B Wins: " + playerBWins);
+    }
+
+    private void showResultDialog(String message) {
+        new AlertDialog.Builder(this)
+                .setTitle("Game Over")
+                .setMessage(message)
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        // Do nothing
+                    }
+                })
+                .setIcon(android.R.drawable.ic_dialog_info)
+                .show();
     }
 }
