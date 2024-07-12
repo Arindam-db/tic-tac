@@ -4,4 +4,6 @@
     <string name="online">ONLINE</string>
     <string name="offline">OFFLINE</string>
     <string name="heading_main">TIC TAC TOE</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
 </resources>

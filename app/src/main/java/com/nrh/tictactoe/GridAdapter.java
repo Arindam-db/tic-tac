@@ -6,12 +6,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
+
 import androidx.core.content.res.ResourcesCompat;
 
 public class GridAdapter extends BaseAdapter {
 
     private final Context context;
-    private final String[] board;
+    private String[] board;
     private final Typeface customFont;
 
     public GridAdapter(Context context, String[] board) {
@@ -43,7 +44,7 @@ public class GridAdapter extends BaseAdapter {
             textView.setLayoutParams(new ViewGroup.LayoutParams(200, 200)); // Set size of each cell
             textView.setGravity(android.view.Gravity.CENTER);
             textView.setTextSize(32);
-            textView.setTypeface(customFont, Typeface.BOLD);// Set custom font and make text bold
+            textView.setTypeface(customFont, Typeface.BOLD); // Set custom font and make text bold
             textView.setTextColor(context.getResources().getColor(R.color.black)); // Set text color
             textView.setBackgroundResource(R.drawable.grid_cell_background); // Set custom background
         } else {
@@ -52,5 +53,10 @@ public class GridAdapter extends BaseAdapter {
 
         textView.setText(board[position]);
         return textView;
+    }
+
+    public void updateBoard(String[] newBoard) {
+        this.board = newBoard;
+        notifyDataSetChanged();
     }
 }
