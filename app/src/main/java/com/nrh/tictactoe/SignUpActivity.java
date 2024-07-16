@@ -61,7 +61,7 @@ public class SignUpActivity extends AppCompatActivity {
             userRef.child("username").get().addOnCompleteListener(task -> {
                 if (!task.isSuccessful() || task.getResult().getValue() == null) {
                     // If username does not exist, go to UsernameSelectionActivity
-                    startActivity(new Intent(SignUpActivity.this, UserNameSelect.class));
+                    startActivity(new Intent(SignUpActivity.this, MatchFind.class));
                 } else {
                     // If username exists, go to MainActivity
                     startActivity(new Intent(SignUpActivity.this, MainActivity.class));

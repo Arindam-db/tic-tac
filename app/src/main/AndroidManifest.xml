@@ -29,9 +29,7 @@
         <activity android:name=".OfflineGameActivity" />
         <activity android:name=".SignInActivity" />
         <activity android:name=".SignUpActivity" />
-        <activity android:name=".UserNameSelect" />
         <activity android:name=".MatchFind" />
-        <activity android:name=".UserProfileActivity" />
 
         <meta-data
             android:name="preloaded_fonts"

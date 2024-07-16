@@ -16,4 +16,5 @@
     <string name="unique_id">Unique ID</string>
     <string name="username">Tap to enter username</string>
     <string name="profile_image">Profile Image</string>
+    <string name="player_find">Player Find</string>
 </resources>

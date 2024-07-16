@@ -85,11 +85,11 @@ public class SignInActivity extends AppCompatActivity {
                 if (!task.isSuccessful() || task.getResult().getValue() == null) {
                     // If username does not exist, go to UsernameSelectionActivity
                     Toast.makeText(SignInActivity.this, "Welcome back! Please set your username.", Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(SignInActivity.this, UserNameSelect.class));
+                    startActivity(new Intent(SignInActivity.this, MatchFind.class));
                 } else {
                     // If username exists, go to username making
                     Toast.makeText(SignInActivity.this, "Welcome back!", Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(SignInActivity.this, UserNameSelect.class));
+                    startActivity(new Intent(SignInActivity.this, MatchFind.class));
                 }
                 finish();
             });
