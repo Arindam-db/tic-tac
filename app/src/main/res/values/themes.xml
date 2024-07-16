@@ -6,4 +6,5 @@
     </style>
 
     <style name="Theme.TicTacToe" parent="Base.Theme.TicTacToe" />
+
 </resources>

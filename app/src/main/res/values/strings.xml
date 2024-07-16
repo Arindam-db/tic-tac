@@ -6,4 +6,14 @@
     <string name="heading_main">TIC TAC TOE</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="sign_in">Sign In</string>
+    <string name="password">Password</string>
+    <string name="email">Email</string>
+    <string name="enter_ur_name">Enter ur name</string>
+    <string name="enter_your_name">Enter your name</string>
+    <string name="submit">Submit</string>
+    <string name="unique_id">Unique ID</string>
+    <string name="username">Tap to enter username</string>
+    <string name="profile_image">Profile Image</string>
 </resources>

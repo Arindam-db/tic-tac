@@ -3,10 +3,8 @@ package com.nrh.tictactoe;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,40 +14,25 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class SignInActivity extends AppCompatActivity {
+public class SignUpActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private EditText emailEditText, passwordEditText;
-    ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sign_in);
+        setContentView(R.layout.activity_sign_up);
 
         mAuth = FirebaseAuth.getInstance();
 
         emailEditText = findViewById(R.id.email);
         passwordEditText = findViewById(R.id.password);
-        Button signInButton = findViewById(R.id.sign_in_button);
         Button signUpButton = findViewById(R.id.sign_up_button);
-        progressBar = findViewById(R.id.progressBar);
 
-        signInButton.setOnClickListener(v -> signInUser());
-        signUpButton.setOnClickListener(v -> {
-            Intent intent = new Intent(SignInActivity.this, SignUpActivity.class);
-            startActivity(intent);
-        });
-
-        // Check if the user is already logged in
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-        if (currentUser != null) {
-            Toast.makeText(this, "Already logged in", Toast.LENGTH_SHORT).show();
-            startActivity(new Intent(SignInActivity.this, MainActivity.class));
-            updateUI(currentUser);
-        }
+        signUpButton.setOnClickListener(v -> signUpUser());
     }
 
-    private void signInUser() {
+    private void signUpUser() {
         String email = emailEditText.getText().toString();
         String password = passwordEditText.getText().toString();
 
@@ -58,21 +41,15 @@ public class SignInActivity extends AppCompatActivity {
             return;
         }
 
-        // Show progress bar
-        progressBar.setVisibility(View.VISIBLE);
-
-        mAuth.signInWithEmailAndPassword(email, password)
+        mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, task -> {
-
-                    progressBar.setVisibility(View.GONE);
-                    // Hide progress bar
                     if (task.isSuccessful()) {
                         FirebaseUser user = mAuth.getCurrentUser();
-                        Toast.makeText(SignInActivity.this, "Signed in successfully", Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(SignInActivity.this, MainActivity.class));
                         updateUI(user);
                     } else {
-                        Toast.makeText(SignInActivity.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
+                        // Display a detailed error message
+                        String errorMessage = task.getException() != null ? task.getException().getMessage() : "Authentication failed.";
+                        Toast.makeText(SignUpActivity.this, errorMessage, Toast.LENGTH_LONG).show();
                         updateUI(null);
                     }
                 });
@@ -84,12 +61,10 @@ public class SignInActivity extends AppCompatActivity {
             userRef.child("username").get().addOnCompleteListener(task -> {
                 if (!task.isSuccessful() || task.getResult().getValue() == null) {
                     // If username does not exist, go to UsernameSelectionActivity
-                    Toast.makeText(SignInActivity.this, "Welcome back! Please set your username.", Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(SignInActivity.this, UserNameSelect.class));
+                    startActivity(new Intent(SignUpActivity.this, UserNameSelect.class));
                 } else {
-                    // If username exists, go to username making
-                    Toast.makeText(SignInActivity.this, "Welcome back!", Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(SignInActivity.this, UserNameSelect.class));
+                    // If username exists, go to MainActivity
+                    startActivity(new Intent(SignUpActivity.this, MainActivity.class));
                 }
                 finish();
             });
